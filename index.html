@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+          const queryString = window.location.search;
+            if (queryString && queryString.startsWith('?[')) {
+                const arrayAsString = queryString.slice(1);
+                const numbersArray = JSON.parse(arrayAsString);
+
+                numbersArray.sort((a, b) => a - b);
+                document.title = numbersArray.toString();
+            }
+        });
+    </script>
+</head>
+<body>
+    <h4>1167675</h4>
+</body>
+</html>
