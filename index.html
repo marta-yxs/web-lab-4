@@ -2,16 +2,23 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <title>Загрузка...</title>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
-          const queryString = window.location.search;
-            if (queryString && queryString.startsWith('?[')) {
-                const arrayAsString = queryString.slice(1);
-                const numbersArray = JSON.parse(arrayAsString);
-
-                numbersArray.sort((a, b) => a - b);
-                document.title = numbersArray.toString();
+            const queryString = decodeURIComponent(window.location.search);
+            const startIndex = queryString.indexOf('[');
+            
+            if (startIndex !== -1) {
+                try {
+                    const arrayAsString = queryString.slice(startIndex);
+                    const numbersArray = JSON.parse(arrayAsString);
+                    if (Array.isArray(numbersArray)) {
+                        numbersArray.sort((a, b) => a - b);
+                        document.title = numbersArray.toString();
+                    }
+                } catch (error) {
+                    document.title = 'Ошибка в данных';
+                }
             }
         });
     </script>
